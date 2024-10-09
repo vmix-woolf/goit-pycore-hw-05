@@ -1,5 +1,5 @@
 def caching_fibonacci() -> int:
-    def fibonacci(n):
+    def fibonacci(n: int)-> int: 
         '''Calculates n-th fibonacci number with memoization technique
         ARGS: n: n-th fibonacci number
         RETURNS: Value of the n-th fibonacci number  
