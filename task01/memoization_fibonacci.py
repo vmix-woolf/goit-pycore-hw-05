@@ -13,7 +13,7 @@ def caching_fibonacci() -> int:
         
         if n not in cache:  # if n number isn't yet in cache, calculates it by the formula and save it
             cache[n] = fibonacci(n - 1) + fibonacci(n - 2)
-        # if not, immediately return its value
+        # if there is it there, immediately return its value
         return cache[n]
 
     return fibonacci
