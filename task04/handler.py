@@ -1,3 +1,6 @@
+from decorations import input_error
+
+@input_error
 def add_contact(args, contacts):
     name, phone_number = args
     if name in contacts:
@@ -8,6 +11,7 @@ def add_contact(args, contacts):
     return "Contact added."
 
 
+@input_error
 def change_contact(args, contacts):
     name, new_phone_number = args
     if name not in contacts:
@@ -18,6 +22,7 @@ def change_contact(args, contacts):
     return "Contact updated."
 
 
+@input_error
 def show_phone(args, contacts):
     if len(args) != 1:
         raise ValueError
