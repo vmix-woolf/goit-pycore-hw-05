@@ -1,35 +1,44 @@
 import sys
-from loader import load_logs
+from load_logs import load_logs
 from parse_log_line import parse_log_line
 from filter_logs import filter_logs_by_level
-from count_logs import count_logs_by_level
-from display_counts import display_log_counts
-from display_level import display_logs_level
+from count_logs_by_level import count_logs_by_level
+from display_logs_counts import display_log_counts
+from display_logs_level import display_logs_level
 
 
 def log_analyzer():
+    '''Analyzes the log file'''
     _, *args = sys.argv
-    file_name = args[0]
+    try:
+        file_name = args[0]
+    except IndexError:
+        print(f"Don't forget to enter the correct log file path and name")
+        exit()
     
     try:
         level = args[1]
+        if level not in ['error', 'info', 'debug', 'warning']:
+            raise ValueError
     except IndexError:
-        print(f"There is no extra parameter. Displaying a full statistics.")
-        level = None  
+        level = None
+    except ValueError:
+        print(f"No such information level")
+        exit()  
+    
     lines = load_logs(file_name)
     
-    dictionary = {}
-    total_list = []
-    
+    parsed_line = {}
+    parsed_lines = []
     for line in lines:
-        dictionary = parse_log_line(line)
-        total_list.append(dictionary)
-    
-    counts = count_logs_by_level(total_list)
+        parsed_line = parse_log_line(line)
+        parsed_lines.append(parsed_line)
+
+    counts = count_logs_by_level(parsed_lines)
     display_log_counts(counts)
     
     if level:
-        filtered_logs_list = filter_logs_by_level(total_list, level)
+        filtered_logs_list = filter_logs_by_level(parsed_lines, level)
         display_logs_level(filtered_logs_list, level)
 
 
