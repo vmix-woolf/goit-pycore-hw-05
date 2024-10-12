@@ -1,10 +1,11 @@
 def caching_fibonacci() -> int:
+    cache = {}
+    
     def fibonacci(n: int)-> int:
         '''Calculates n-th fibonacci number with memoization technique
         ARGS: n: n-th fibonacci number
         RETURNS: Value of the n-th fibonacci number  
         '''
-        cache = {}
         if n <= 0:
             return 0
 
@@ -23,4 +24,5 @@ fib = caching_fibonacci()
 print(fib(5))
 print(fib(10))
 print(fib(15))
-print(fib(32))
+print(fib(55))
+print(fib(100))
